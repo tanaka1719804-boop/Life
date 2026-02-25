@@ -1,160 +1,160 @@
-# CLAUDE.md - Development Guide for AI Assistants
+# CLAUDE.md - AI アシスタント向け開発ガイド
 
-This document provides comprehensive guidance for AI assistants working on the Life project. It outlines the codebase structure, development workflows, and key conventions to follow.
-
----
-
-## 1. Project Overview
-
-**Project Name:** Life
-**Repository:** tanaka1719804-boop/Life
-**Status:** New project (under initial development)
-**Primary Development Branch:** `claude/add-claude-documentation-*` (feature branches)
-
-### Project Purpose
-The Life project is a new initiative. As it develops, this document will be updated to reflect the actual purpose, technology stack, and architecture.
-
-### Current State
-- Empty repository with no production code yet
-- Active development on feature branches
-- Use this guide as a template for establishing project conventions
+このドキュメントは、Life プロジェクトで作業する AI アシスタント向けの包括的なガイダンスを提供します。コードベース構造、開発ワークフロー、および従うべき主要な規約について説明します。
 
 ---
 
-## 2. Repository Structure
+## 1. プロジェクト概要
+
+**プロジェクト名:** Life
+**リポジトリ:** tanaka1719804-boop/Life
+**ステータス:** 新規プロジェクト (初期開発中)
+**主要開発ブランチ:** `claude/add-claude-documentation-*` (機能ブランチ)
+
+### プロジェクトの目的
+Life プロジェクトは新しいイニシアチブです。プロジェクトが進むにつれて、このドキュメントは実際の目的、技術スタック、およびアーキテクチャを反映するように更新されます。
+
+### 現在の状態
+- 本番コードのない空のリポジトリ
+- 機能ブランチでの積極的な開発
+- このガイドをプロジェクト規約確立のテンプレートとして使用
+
+---
+
+## 2. リポジトリ構造
 
 ```
 /Life
-├── CLAUDE.md                 # This file - development guide for AI assistants
-├── README.md                 # Project overview and quick start (create as needed)
-├── .git/                     # Git configuration
-├── .gitignore                # Git ignore patterns
-├── docs/                     # Documentation (create as project grows)
-├── src/                      # Source code (structure depends on technology)
-├── tests/                    # Test suite
-├── scripts/                  # Build and utility scripts
-├── .github/                  # GitHub configuration
-│   └── workflows/            # CI/CD pipeline definitions
-└── package.json / setup.py   # Dependency management (as appropriate)
+├── CLAUDE.md                 # このファイル - AI アシスタント向け開発ガイド
+├── README.md                 # プロジェクト概要とクイックスタート (必要に応じて作成)
+├── .git/                     # Git 設定
+├── .gitignore                # Git 無視パターン
+├── docs/                     # ドキュメンテーション (プロジェクト成長に伴い作成)
+├── src/                      # ソースコード (構造は技術に依存)
+├── tests/                    # テストスイート
+├── scripts/                  # ビルドおよびユーティリティスクリプト
+├── .github/                  # GitHub 設定
+│   └── workflows/            # CI/CD パイプライン定義
+└── package.json / setup.py   # 依存関係管理 (必要に応じて)
 ```
 
-### Directory Guidelines
-- **`src/`**: All production source code
-- **`tests/`**: Test files mirroring src structure
-- **`docs/`**: Architecture decisions, guides, and documentation
-- **`scripts/`**: Deployment, build, and utility scripts
-- **`.github/workflows/`**: CI/CD pipeline definitions
+### ディレクトリ ガイドライン
+- **`src/`**: すべての本番ソースコード
+- **`tests/`**: src 構造をミラーリングするテストファイル
+- **`docs/`**: アーキテクチャ決定、ガイド、およびドキュメンテーション
+- **`scripts/`**: デプロイ、ビルド、およびユーティリティスクリプト
+- **`.github/workflows/`**: CI/CD パイプライン定義
 
 ---
 
-## 3. Development Workflow
+## 3. 開発ワークフロー
 
-### Branch Strategy
-- **Main branch:** Not yet established (will be created as project progresses)
-- **Feature branches:** Follow naming convention `claude/feature-name-<session-id>`
-- **Hotfix branches:** `hotfix/description` (if main branch exists)
+### ブランチ戦略
+- **メインブランチ:** 未確立 (プロジェクト進行に伴い作成予定)
+- **機能ブランチ:** 命名規則 `claude/feature-name-<session-id>` に従う
+- **ホットフィックスブランチ:** `hotfix/description` (メインブランチが存在する場合)
 
-### Creating & Switching Branches
+### ブランチの作成と切り替え
 ```bash
-# Create and switch to new feature branch
+# 新しい機能ブランチを作成して切り替え
 git checkout -b claude/feature-name-XfjqL
 
-# List all branches
+# すべてのブランチを一覧表示
 git branch -a
 
-# Switch to existing branch
+# 既存ブランチに切り替え
 git checkout <branch-name>
 ```
 
-### Committing Changes
-- Write clear, descriptive commit messages
-- Reference relevant issues/PRs when applicable
-- Follow this format:
+### 変更のコミット
+- 明確で詳細なコミットメッセージを記述する
+- 該当する場合はイシュー/PR を参照する
+- このフォーマットに従う:
   ```
   <type>: <subject>
 
-  <body - optional but recommended>
+  <body - オプションだが推奨>
 
-  Closes #<issue-number> (if applicable)
+  Closes #<issue-number> (該当する場合)
   ```
 
-- Commit types: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`
-- Example:
+- コミットタイプ: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`
+- 例:
   ```
-  feat: add user authentication module
+  feat: ユーザー認証モジュールを追加
 
-  - Implement JWT-based authentication
-  - Add login and logout endpoints
-  - Create user session management
+  - JWT ベースの認証を実装
+  - ログインおよびログアウトエンドポイントを追加
+  - ユーザーセッション管理を作成
 
   Closes #42
   ```
 
-### Pushing Changes
+### 変更のプッシュ
 ```bash
-# Push with tracking (required for new branches)
+# トラッキングでプッシュ (新しいブランチに必須)
 git push -u origin <branch-name>
 
-# Subsequent pushes
+# 後続のプッシュ
 git push
 
-# Force push (only if necessary and coordinated)
+# 強制プッシュ (必要かつ調整された場合のみ)
 git push --force-with-lease origin <branch-name>
 ```
 
-### Pull Requests
-- Always create a PR before merging to main
-- Title: Clear, descriptive summary
-- Description: Include context, testing done, and any breaking changes
-- Request reviewers before merging
-- Ensure CI/CD passes before merge
+### プルリクエスト
+- メインへのマージ前に必ず PR を作成する
+- タイトル: 明確で詳細な要約
+- 説明: コンテキスト、実施したテスト、および破壊的変更を含める
+- マージ前にレビュアーにリクエストする
+- マージ前に CI/CD が成功することを確認する
 
 ---
 
-## 4. Key Conventions
+## 4. 主要な規約
 
-### Code Style & Formatting
-- **Language TBD:** Follow language-specific conventions once technology is selected
-- **Formatting:** Use automated tools (Prettier, Black, Rustfmt, etc.)
-- **Linting:** Enable linter to catch issues early
-- **Type Safety:** Use type hints/annotations where available
+### コードスタイル & フォーマット
+- **言語 TBD:** 技術を選択したら、言語固有の規約に従う
+- **フォーマット:** 自動ツール (Prettier、Black、Rustfmt など) を使用
+- **リンティング:** 問題を早期に検出するためにリンターを有効にする
+- **型安全性:** 利用可能な場合は型ヒント/注釈を使用する
 
-### Naming Conventions
-- **Variables & Functions:** camelCase (JavaScript) or snake_case (Python)
-- **Classes/Types:** PascalCase
-- **Constants:** UPPER_SNAKE_CASE
-- **Files:** kebab-case for JavaScript/TypeScript, snake_case for Python
-- **Directories:** lowercase, descriptive names
+### 命名規約
+- **変数 & 関数:** camelCase (JavaScript) または snake_case (Python)
+- **クラス/型:** PascalCase
+- **定数:** UPPER_SNAKE_CASE
+- **ファイル:** JavaScript/TypeScript の場合は kebab-case、Python の場合は snake_case
+- **ディレクトリ:** 小文字で説明的な名前
 
-### File Organization
-- Keep files focused on single responsibilities
-- Max 500-1000 lines per file (language dependent)
-- Group related functionality together
-- Export public APIs clearly; mark internal utilities
+### ファイル構成
+- ファイルを単一責任に焦点を当てて保持する
+- ファイルあたり最大 500-1000 行 (言語に依存)
+- 関連機能をグループ化する
+- パブリック API を明確にエクスポートする; 内部ユーティリティをマークする
 
-### Error Handling
-- Always handle errors explicitly
-- Provide meaningful error messages
-- Log errors with appropriate context
-- Fail fast and safely
+### エラーハンドリング
+- 常にエラーを明示的に処理する
+- 意味のあるエラーメッセージを提供する
+- 適切なコンテキストでエラーをログに記録する
+- 迅速かつ安全に失敗する
 
-### Documentation
-- Add comments for non-obvious logic only
-- Maintain docstrings for public APIs
-- Update documentation when code changes
-- Link to architectural decision documents in code comments
+### ドキュメンテーション
+- 明白でないロジックに対してのみコメントを追加する
+- パブリック API のドキュメント文字列を維持する
+- コードが変更されたときにドキュメンテーションを更新する
+- コメント内のアーキテクチャ決定ドキュメントにリンクする
 
 ---
 
-## 5. Testing & Quality
+## 5. テストと品質
 
-### Testing Strategy (To Be Implemented)
-- **Unit Tests:** Test individual functions/methods in isolation
-- **Integration Tests:** Test module interactions
-- **E2E Tests:** Test complete workflows (if applicable)
-- **Coverage Goal:** Aim for 80%+ code coverage
+### テスト戦略 (実装予定)
+- **ユニットテスト:** 個別の関数/メソッドを分離してテストする
+- **統合テスト:** モジュール間のやり取りをテストする
+- **E2E テスト:** 完全なワークフローをテストする (該当する場合)
+- **カバレッジ目標:** 80% 以上のコードカバレッジを目指す
 
-### Test File Structure
+### テストファイル構造
 ```
 tests/
 ├── unit/
@@ -165,219 +165,219 @@ tests/
     └── [workflow-name].e2e.test.js
 ```
 
-### Running Tests Locally
+### ローカルでテストを実行
 ```bash
-# Run all tests
+# すべてのテストを実行
 npm test / python -m pytest
 
-# Run specific test file
+# 特定のテストファイルを実行
 npm test -- src/__tests__/file.test.js
 
-# Run tests with coverage
+# カバレッジ付きでテストを実行
 npm run test:coverage
 ```
 
-### CI/CD Pipeline
-- Tests run automatically on every PR
-- Coverage reports generated and checked
-- Linting and type checking must pass
-- All checks must pass before merging
+### CI/CD パイプライン
+- すべての PR でテストが自動的に実行される
+- カバレッジレポートが生成および確認される
+- リンティングと型チェックが成功する必要がある
+- マージ前にすべてのチェックが成功する必要がある
 
 ---
 
-## 6. Code Review & Quality Standards
+## 6. コードレビューと品質基準
 
-### Before Submitting a PR
-- [ ] Code follows project conventions
-- [ ] All tests pass locally
-- [ ] Code coverage is adequate
-- [ ] Linting and type checking pass
-- [ ] No console.log or debug code
-- [ ] Documentation updated
-- [ ] Commit messages are clear
+### PR を送信する前に
+- [ ] コードはプロジェクト規約に従っている
+- [ ] すべてのテストがローカルで成功している
+- [ ] コードカバレッジが適切である
+- [ ] リンティングと型チェックが成功している
+- [ ] console.log またはデバッグコードがない
+- [ ] ドキュメンテーションが更新されている
+- [ ] コミットメッセージが明確である
 
-### Common Issues to Avoid
-- **Performance:** Don't ignore algorithmic complexity
-- **Security:** Validate all inputs, avoid injection vulnerabilities
-- **Accessibility:** Ensure UI features are accessible
-- **Memory Leaks:** Clean up resources, avoid circular references
-- **Over-engineering:** KISS principle - keep it simple
-
----
-
-## 7. Deployment (To Be Configured)
-
-### Deployment Environments
-- **Development:** Local development environment
-- **Staging:** Pre-production testing environment
-- **Production:** Live environment for users
-
-### Deployment Checklist
-- [ ] All tests pass
-- [ ] Code reviewed and approved
-- [ ] Documentation updated
-- [ ] Version bumped appropriately
-- [ ] Changelog updated
-- [ ] No environment secrets in code
-- [ ] Database migrations prepared (if applicable)
+### 回避すべき一般的な問題
+- **パフォーマンス:** アルゴリズムの複雑さを無視しない
+- **セキュリティ:** すべての入力を検証し、インジェクション脆弱性を回避する
+- **アクセシビリティ:** UI 機能がアクセス可能であることを確認する
+- **メモリリーク:** リソースをクリーンアップし、循環参照を回避する
+- **過度な実装:** KISS 原則 - シンプルに保つ
 
 ---
 
-## 8. AI Assistant Guidelines
+## 7. デプロイメント (設定予定)
 
-### When Working on This Project
+### デプロイメント環境
+- **開発:** ローカル開発環境
+- **ステージング:** 本番前テスト環境
+- **本番:** ユーザー向けライブ環境
 
-#### Do's
-- ✅ Read existing code thoroughly before making changes
-- ✅ Maintain consistency with established patterns
-- ✅ Write clear commit messages
-- ✅ Test changes before committing
-- ✅ Document complex logic
-- ✅ Follow the principle of least change - only modify what's necessary
-- ✅ Ask for clarification on ambiguous requirements
-- ✅ Refactor code responsibly with test coverage
-
-#### Don'ts
-- ❌ Commit without understanding the impact
-- ❌ Introduce dependencies without discussion
-- ❌ Break existing functionality
-- ❌ Commit commented-out code
-- ❌ Add unnecessary complexity or premature optimization
-- ❌ Ignore test failures
-- ❌ Force-push to main/master branch
-
-### Decision Making
-- **Ambiguity:** Ask for clarification before proceeding
-- **Trade-offs:** Discuss performance vs. maintainability concerns
-- **Architecture:** Propose designs for larger features, don't implement in isolation
-- **Dependencies:** Minimize external dependencies; justify new ones
-
-### Common Tasks
-
-#### Adding a New Feature
-1. Create a feature branch from main
-2. Plan the implementation with clear, testable components
-3. Implement incrementally with tests
-4. Commit with clear messages
-5. Create a PR with detailed description
-6. Address review feedback
-7. Merge once approved
-
-#### Fixing a Bug
-1. Reproduce the bug with a test case
-2. Fix the underlying cause
-3. Verify the fix with the test
-4. Add regression test if not covered
-5. Commit with clear explanation
-6. Create a PR referencing the issue
-
-#### Refactoring Code
-1. Ensure comprehensive test coverage exists
-2. Make small, incremental changes
-3. Run tests after each change
-4. Maintain functionality and API
-5. Document any behavior changes
-6. Keep commits focused on specific improvements
+### デプロイメント チェックリスト
+- [ ] すべてのテストが成功している
+- [ ] コードがレビュー済みで承認されている
+- [ ] ドキュメンテーションが更新されている
+- [ ] バージョンが適切にバンプされている
+- [ ] チェンジログが更新されている
+- [ ] コード内に環境シークレットがない
+- [ ] データベースマイグレーションが準備されている (該当する場合)
 
 ---
 
-## 9. Development Setup (To Be Completed)
+## 8. AI アシスタント ガイドライン
 
-### Prerequisites
-- Git configured with name and email
-- Required language runtime/compiler installed
-- Package manager appropriate to the stack
+### このプロジェクトで作業する場合
 
-### Initial Setup
+#### すべき事
+- ✅ 変更を加える前に既存コードを徹底的に読む
+- ✅ 確立されたパターンとの一貫性を保つ
+- ✅ 明確なコミットメッセージを記述する
+- ✅ コミット前に変更をテストする
+- ✅ 複雑なロジックをドキュメント化する
+- ✅ 最小変更の原則に従う - 必要な部分のみ変更する
+- ✅ 曖昧な要件について明確化を求める
+- ✅ テストカバレッジで責任を持ってコードをリファクタリングする
+
+#### してはいけない事
+- ❌ 影響を理解せずにコミットする
+- ❌ 議論なしに依存関係を導入する
+- ❌ 既存の機能を破壊する
+- ❌ コメントアウトされたコードをコミットする
+- ❌ 不要な複雑性または時期尚早の最適化を追加する
+- ❌ テスト失敗を無視する
+- ❌ main/master ブランチに強制プッシュする
+
+### 意思決定
+- **曖昧性:** 進む前に明確化を求める
+- **トレードオフ:** パフォーマンスと保守性の懸念について議論する
+- **アーキテクチャ:** より大きな機能の設計を提案する; 分離実装しない
+- **依存関係:** 外部依存関係を最小化する; 新しい依存関係を正当化する
+
+### 一般的なタスク
+
+#### 新しい機能を追加する
+1. main から機能ブランチを作成する
+2. 明確でテスト可能なコンポーネントを使用して実装を計画する
+3. テストを伴いながら段階的に実装する
+4. 明確なメッセージでコミットする
+5. 詳細な説明を含む PR を作成する
+6. レビューフィードバックに対応する
+7. 承認されたらマージする
+
+#### バグを修正する
+1. テストケースを使用してバグを再現する
+2. 根本的な原因を修正する
+3. テストで修正を確認する
+4. カバレッジがない場合はリグレッションテストを追加する
+5. 明確な説明でコミットする
+6. イシューを参照する PR を作成する
+
+#### コードをリファクタリングする
+1. 包括的なテストカバレッジが存在することを確認する
+2. 小さくて段階的な変更を行う
+3. 各変更後にテストを実行する
+4. 機能と API を維持する
+5. 動作の変更をドキュメント化する
+6. コミットを特定の改善に焦点を当てる
+
+---
+
+## 9. 開発セットアップ (完了予定)
+
+### 前提条件
+- Git が名前とメールで設定されている
+- 必要な言語ランタイム/コンパイラがインストールされている
+- スタックに適したパッケージマネージャー
+
+### 初期セットアップ
 ```bash
-# Clone the repository
+# リポジトリをクローン
 git clone http://local_proxy@127.0.0.1:17461/git/tanaka1719804-boop/Life
 cd Life
 
-# Install dependencies
-# npm install / pip install -r requirements.txt / cargo build / etc.
+# 依存関係をインストール
+# npm install / pip install -r requirements.txt / cargo build / 等
 
-# Create .env file if needed
+# 必要に応じて .env ファイルを作成
 # cp .env.example .env
 
-# Run tests to verify setup
+# セットアップを確認するためにテストを実行
 # npm test / python -m pytest / cargo test
 ```
 
-### IDE/Editor Configuration
-- Install relevant linting extensions
-- Enable auto-formatting on save
-- Install language support extensions
-- Configure debug settings
+### IDE/エディタ 設定
+- 関連するリンティング拡張機能をインストール
+- 保存時の自動フォーマットを有効にする
+- 言語サポート拡張機能をインストール
+- デバッグ設定を構成する
 
 ---
 
-## 10. Resources & Documentation (To Be Updated)
+## 10. リソース & ドキュメンテーション (更新予定)
 
-### To Be Created
-- `README.md` - Project overview and quick start
-- `ARCHITECTURE.md` - System design and architecture decisions
-- `CONTRIBUTING.md` - Contribution guidelines (can reference this file)
-- `API.md` - API documentation (if applicable)
-- `.github/ISSUE_TEMPLATE/` - Issue templates
-- `.github/PULL_REQUEST_TEMPLATE.md` - PR template
+### 作成予定
+- `README.md` - プロジェクト概要とクイックスタート
+- `ARCHITECTURE.md` - システム設計とアーキテクチャ決定
+- `CONTRIBUTING.md` - 貢献ガイドライン (このファイルを参照可能)
+- `API.md` - API ドキュメンテーション (該当する場合)
+- `.github/ISSUE_TEMPLATE/` - イシューテンプレート
+- `.github/PULL_REQUEST_TEMPLATE.md` - PR テンプレート
 
-### External References
-- (Add relevant documentation links as project develops)
+### 外部参照
+- (プロジェクト開発に伴い関連ドキュメンテーションリンクを追加)
 
 ---
 
-## 11. Troubleshooting
+## 11. トラブルシューティング
 
-### Git Issues
+### Git の問題
 
-**"Push rejected - branch doesn't exist on remote"**
+**「プッシュが拒否されました - リモートにブランチが存在しません」**
 ```bash
-# Make sure to use -u flag when pushing new branch
+# 新しいブランチをプッシュするときは -u フラグを使用してください
 git push -u origin <branch-name>
 ```
 
-**"Merge conflicts when pulling"**
+**「プル時にマージコンフリクトが発生」**
 ```bash
-# Resolve conflicts in your editor, then:
+# エディタでコンフリクトを解決してから:
 git add <resolved-files>
-git commit -m "Resolve merge conflicts"
+git commit -m "マージコンフリクトを解決"
 git push
 ```
 
-**"Need to undo recent commits"**
+**「最近のコミットを元に戻す必要がある」**
 ```bash
-# Undo last commit but keep changes
+# 最後のコミットを元に戻すが変更は保持
 git reset --soft HEAD~1
 
-# Undo last commit and discard changes
+# 最後のコミットを元に戻して変更を破棄
 git reset --hard HEAD~1
 ```
 
 ---
 
-## 12. Maintenance & Updates
+## 12. メンテナンス & 更新
 
-This document should be updated:
-- When new technologies are adopted
-- When development processes change
-- When new conventions are established
-- When major architectural decisions are made
-- Regularly to reflect project maturity
+このドキュメントは以下の場合に更新する必要があります:
+- 新しいテクノロジーを採用する場合
+- 開発プロセスが変わる場合
+- 新しい規約が確立される場合
+- 主要なアーキテクチャ決定が行われる場合
+- プロジェクトの成熟度を反映するために定期的に
 
-**Last Updated:** 2026-02-24
-**Last Updated By:** AI Assistant
-**Status:** Template - To be expanded with actual project details
+**最終更新:** 2026-02-25
+**最終更新者:** AI アシスタント
+**ステータス:** テンプレート - 実際のプロジェクト詳細で拡張予定
 
 ---
 
-## Next Steps
+## 次のステップ
 
-1. **Define Project Purpose:** Clearly state what this project does
-2. **Choose Technology Stack:** Select languages, frameworks, and tools
-3. **Establish CI/CD:** Set up GitHub Actions or similar
-4. **Create Baseline Documentation:** README, API docs, architecture decisions
-5. **Initialize Project Structure:** Create directories and starter files
-6. **Set Team Standards:** Establish code review criteria and quality gates
+1. **プロジェクトの目的を定義:** このプロジェクトが何をするかを明確に述べる
+2. **技術スタックを選択:** 言語、フレームワーク、およびツールを選択する
+3. **CI/CD を確立:** GitHub Actions または類似のセットアップ
+4. **ベースラインドキュメンテーションを作成:** README、API ドキュメント、アーキテクチャ決定
+5. **プロジェクト構造を初期化:** ディレクトリとスターターファイルを作成する
+6. **チーム基準を設定:** コードレビュー基準と品質ゲートを確立する
 
-For AI assistants: This template is ready to be expanded. As the project develops, update sections with concrete details about the actual technology stack, architecture, and workflows being used.
+AI アシスタント向け: このテンプレートは拡張する準備ができています。プロジェクトが進むにつれて、実際の技術スタック、アーキテクチャ、およびワークフローについて具体的な詳細でセクションを更新してください。
